@@ -1,5 +1,7 @@
 package juanjovazquez.s99
 
+import scala.util.Try
+
 object Lists {
 
   /**
@@ -11,6 +13,12 @@ object Lists {
     case x :: Nil => x
     case _ :: xs => last(xs)
   }
+
+  def lastViaReduceRight[A](x: List[A]): A =
+    Try(x.reduceRight((_, acc) => acc)).getOrElse(throw new NoSuchElementException)
+
+  def lastViaReduceLeft[A](x: List[A]): A =
+    Try(x.reduceLeft((_, a) => a)).getOrElse(throw new NoSuchElementException)
 
   /**
    * P02. Find the last but one element of a list.
