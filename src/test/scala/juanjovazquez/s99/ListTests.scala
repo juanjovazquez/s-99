@@ -65,6 +65,35 @@ class ListTests extends FunSuite with Checkers {
     }
   }
 
+  /** P04 */
+  test("`length` should return the number of elements in lists") {
+    check { (a: List[Int]) =>
+      checkLength(a)(length)
+    }
+  }
+
+  test("`lengthBuiltIn` should return the number of elements in lists") {
+    check { (a: List[Int]) =>
+      checkLength(a)(lengthBuiltIn)
+    }
+  }
+
+  test("`lengthViaFoldLeft` should return the number of elements in lists") {
+    check { (a: List[Int]) =>
+      checkLength(a)(lengthViaFoldLeft)
+    }
+  }
+
+  test("`lengthViaFoldRight` should return the number of elements in lists") {
+    check { (a: List[Int]) =>
+      checkLength(a)(lengthViaFoldRight)
+    }
+  }
+
+  private def checkLength[A](l: List[A])(f: List[A] => Int) = {
+    length(l) == l.length
+  }
+
   // Generators
 
   val listPlusIndexGen = for {

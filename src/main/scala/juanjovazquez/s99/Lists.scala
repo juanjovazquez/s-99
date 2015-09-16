@@ -49,4 +49,24 @@ object Lists {
       throw new IndexOutOfBoundsException(s"$i")
     }
 
+  /**
+   * P04. Find the number of elements of a list.
+   */
+  def length[A](l: List[A]): Int = {
+    @annotation.tailrec
+    def go(rest: List[A], acc: Int): Int = rest match {
+      case Nil => acc
+      case _ :: xs => go(xs, acc + 1)
+    }
+    go(l, 0)
+  }
+
+  def lengthBuiltIn[A](l: List[A]): Int = l.length
+
+  def lengthViaFoldLeft[A](l: List[A]): Int =
+    l.foldLeft(0)((acc, _) => acc + 1)
+
+  def lengthViaFoldRight[A](l: List[A]): Int =
+    l.foldRight(0)((_, acc) => acc + 1)
+
 }
