@@ -1,5 +1,6 @@
 package juanjovazquez.s99
 
+import scala.collection.mutable.ListBuffer
 import scala.util.Try
 
 object Lists {
@@ -68,5 +69,30 @@ object Lists {
 
   def lengthViaFoldRight[A](l: List[A]): Int =
     l.foldRight(0)((_, acc) => acc + 1)
+
+  /**
+   * P05. Reverse a list.
+   */
+  def reverse[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case x :: xs => reverse(xs) ::: List(x)
+  }
+
+  def reverseBultin[A](l: List[A]): List[A] = l.reverse
+
+  def reverseTailRec[A](l: List[A]): List[A] = {
+    @annotation.tailrec
+    def go(result: List[A], rest: List[A]): List[A] = rest match {
+      case Nil => result
+      case x :: xs => go(x :: result, xs)
+    }
+    go(Nil, l)
+  }
+
+  def reverseViaFoldLeft[A](l: List[A]): List[A] =
+    l.foldLeft(List.empty[A])((acc, a) => a :: acc)
+
+  def reverseViaFoldRight[A](l: List[A]): List[A] =
+    l.foldRight(List.empty[A])((a, acc) => acc ::: List(a))
 
 }

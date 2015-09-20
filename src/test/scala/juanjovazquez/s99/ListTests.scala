@@ -94,6 +94,41 @@ class ListTests extends FunSuite with Checkers {
     length(l) == l.length
   }
 
+  /** P04 */
+  test("`reverse` should reverse the order of elements un lists") {
+    check { (a: List[Int]) =>
+      checkReverse(a)(reverse)
+    }
+  }
+
+  test("`reverseBuiltin` should reverse the order of elements un lists") {
+    check { (a: List[Int]) =>
+      checkReverse(a)(reverseBultin)
+    }
+  }
+
+  test("`reverseTailRec` should reverse the order of elements un lists") {
+    check { (a: List[Int]) =>
+      checkReverse(a)(reverseTailRec)
+    }
+  }
+
+  test("`reverseViaFoldLeft` should reverse the order of elements un lists") {
+    check { (a: List[Int]) =>
+      checkReverse(a)(reverseViaFoldLeft)
+    }
+  }
+
+  test("`reverseViaFoldRight` should reverse the order of elements un lists") {
+    check { (a: List[Int]) =>
+      checkReverse(a)(reverseViaFoldRight)
+    }
+  }
+
+  private def checkReverse[A](l: List[A])(f: List[A] => List[A]) = {
+    f(l) == l.reverse
+  }
+
   // Generators
 
   val listPlusIndexGen = for {
